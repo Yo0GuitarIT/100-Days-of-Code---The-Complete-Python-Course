@@ -1,26 +1,39 @@
-print("Exam Grade Calculator")
+from getpass import getpass as input
 
-name = input("Name of exam:")
-max_score = int(input("Max. Possible Score:"))
-score = int(input("Your Score:"))
+print("E P I C 😉 B A T T L E")
+print("Select your own move(r, p or s)")
+P1 = input("Player 1")
+P2 = input("Player 2")
 
-final = float(score/max_score)
-final_number = round(final,2)	
-perc = round(final*100,2)
+if P1 == "r":
+	if P2 =="r":
+		print("Even")
+	elif P2 =="p":
+		print("Player2's papper is win to Playe1's rock")
+	elif P2 =="s":
+		print("Player1's rock is win to Playe2's scissor")
+	else:
+		print("Player2 Please enter correct ans.")
 
-print("You got",perc,"%")
+elif P1 =="p":
+	if P2 =="r":
+		print("Player1'paper is win to Playe2'rock")
+	elif P2 =="p":
+		print("Even")	
+	elif P2 =="s":
+		print("Player2's scissor is win to Player1's papper")
+	else: 
+		print("Player2 Please enter correct ans.")
 
-if final_number >= .90:
-  print("Your letter score is an A+")
-elif final_number >= .80 and final_number <= .89:
-  print("Your letter grade is an A-.")
-elif final_number >= .70 and final_number <= .79:
-  print("Your letter score is a B.")
-elif final_number >= .60 and final_number <= .69:
-  print("Your letter grade is a C.")
-elif final_number >= .50 and final_number <= .59:
-  print("Your letter grade is a D.")
-elif final_number <= .49:
-  print("Your letter grade is a U.")
-else: 
-  print("Try again!")
+elif P1 =="s":
+	if P2=="r":
+		print("Player2's rock is win to Player1's scissor")
+	elif P2 =="P":
+		print("Player1's scissor is win to Player2's papper")
+	elif P2 =="s":
+		print("Even")		
+	else:
+		print("Player2 Please enter correct ans.")
+		
+else:
+	print("Player1 Please enter correct ans.")
