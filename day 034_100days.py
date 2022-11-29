@@ -22,6 +22,7 @@ def spam(num):
 	  Ian Spammington III
 		
 	  """)
+	time.sleep(0.5)
 
 while True:
   print("SPAMMER Inc.")
