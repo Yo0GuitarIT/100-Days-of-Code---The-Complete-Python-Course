@@ -14,13 +14,15 @@ class job:
 		print(f"Hours worked: {self.hoursWork}\n")
 	
 class teacher(job):
+	subject = None
+	position = None
 	
-	def __init__(self):
-		self.name = "Teacher"
-		self.salary = "Nowhere near enough"
-		self.hoursWork = "All of them"
-		self.subject = "Computer Science"
-		self.position = "Classroom Teacher"
+	def __init__(self,name,salary,hoursWork,subject,position):
+		self.name = name
+		self.salary = salary
+		self.hoursWork = hoursWork
+		self.subject = subject
+		self.position = position
 		
 	def data(self):
 		print(f"Job type: {self.name}")
@@ -30,13 +32,15 @@ class teacher(job):
 		print(f"Position: {self.position}\n")
 
 class doctor(job):
+	speciality = None
+	YearsOfExperience = None
 
-	def __init__(self):
-		self.name = "Doctor"
-		self.salary = "Doing very nicely thank you"
-		self.hoursWork = 50
-		self.speciality = "Pediatric Consultant"
-		self.YearsOfExperience = 7
+	def __init__(self,name,salary,hoursWork,speciality,YearsOfExperience):
+		self.name = name
+		self.salary = salary
+		self.hoursWork = hoursWork
+		self.speciality = speciality
+		self.YearsOfExperience = YearsOfExperience
 
 	def data(self):
 		print(f"Job type: {self.name}")
@@ -49,8 +53,8 @@ print("Jobs Jobs Jobs!\n")
 p1 = job("Lawyer","Squillions",60)
 p1.data()
 
-p2 = teacher()
+p2 = teacher("Teacher","Nowhere near enough","All of them","Computer Science","Classroom Teacher")
 p2.data()
 
-p3 = doctor()
+p3 = doctor("Doctor","Doing very nicely thank you",50,"Pediatric Consultant",7)
 p3.data()
