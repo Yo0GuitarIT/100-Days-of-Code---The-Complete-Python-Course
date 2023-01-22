@@ -1,36 +1,82 @@
-class character():
-	name = None
-	health = None
-	magicPoint = None
-	
-	def __init__(self,name,health,magicPoint):
-		self.name = name
-		self.health = health
-		self.magicPoint = magicPoint
+class character:
+  name = None
+  health = 100
+  mp = 100
 
-	def print(self):
-		print(f"Name: {self.name}")
-		print(f"Health: {self.health}")
-		print(f"Magic: {self.magicPoint}")
+  def __init__(self, name):
+    self.name = name
 
-class david(character):
-	lives = None
-	alive = None
+  def print(self):
+    print(f"{self.name}\tHP: {self.health}\t MP: {self.mp}")
 
-	def __init__(self,name,health,magicPoint,lives,alive):
-		self.name = name
-		self.health = health
-		self.magicPoint = magicPoint
-		self.lives = lives
-		self.alive = alive
+  def setStats(self, health, mp):
+    self.health = health
+    self.mp = mp
 
-	def print(self):
-		print(f"Name: {self.name}")
-		print(f"Health: {self.health}")
-		print(f"Magic: {self.magicPoint}")
-		print(f"Lives: {self.lives}")
-		print(f"Alive: {self.alive}")
-		
+class player(character):
+  nickname = None
+  lives = 3
 
-david = david("David",100,50,3,"Yes")
-david.print()
+  def __init__(self, nickname):
+    self.name = "Player"
+    self.nickname = nickname
+
+  def print(self):
+    print(f"{self.name}\tHP: {self.health}\t MP: {self.mp}\tNickname: {self.nickname}\tLives: {self.lives}")
+
+  def isAlive(self):
+    if self.lives > 0:
+      print(f"{self.nickname} lives on!")
+      return True
+    else:
+      print(f"{self.nickname} has expired!")
+      return False
+
+ian = player("Ian the mighty")
+ian.print()
+print(ian.isAlive())
+
+class enemy(character):
+  type = None
+  strength = None
+
+  def __init__(self, name, type, strength):
+    self.name = name
+    self.type = type
+    self.strength = strength
+
+  def print(self):
+    print(f"{self.name}\tHP: {self.health}\t MP: {self.mp}\tType: {self.type}\tStrength: {self.strength}")
+
+class orc(enemy):
+  speed = None
+
+  def __init__(self, speed):
+    self.name = "Orc"
+    self.type = "Orc"
+    self.strength = 200
+    self.speed = speed
+
+  def print(self):
+    print(f"{self.name}\tHP: {self.health}\t MP: {self.mp}\tType: {self.type}\tStrength: {self.strength}\tSpeed: {self.speed}")
+
+sharron = orc(250)
+gary = orc(205)
+
+sharron.print()
+gary.print()
+
+class vampire(enemy):
+  day = True
+
+  def __init__(self, day):
+    self.name = "Vampire"
+    self.type = "Vampire"
+    self.strength = 150
+    self.day = day
+
+  def print(self):
+    print(f"{self.name}\tHP: {self.health}\t MP: {self.mp}\tType: {self.type}\tStrength: {self.strength}\tDay: {self.day}")
+
+eric = vampire(False)
+eric.print()
