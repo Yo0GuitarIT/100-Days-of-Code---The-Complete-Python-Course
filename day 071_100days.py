@@ -19,6 +19,8 @@ def login():
 
 	if newAns == db[ansUserName]["Password"]:
 		print("Login successful\n")
+	else:
+		print("Login Error\n")
 
 	
 while True:	
@@ -29,4 +31,7 @@ while True:
 	elif step == 2:
 		login()
 	else:
+		keys = db.keys()
+		for key in keys:
+			print(db[key])
 		print("Please try again.\n")
