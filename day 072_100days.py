@@ -1,33 +1,5 @@
-import random, os, time, datetime
 from replit import db
-
-nextstep = False
-
-def add():
-	os.system("clear")
-	userName = input("Username > ")
-	passWord = input("Password > ")
-	salt = random.randint(1000,9999)
-	newPassWord = f"{passWord}{salt}"
-	newPassWord = hash(newPassWord)
-	db[userName] = {"Password": newPassWord,"salt":salt}
-	print("It's be signed up")
-	time.sleep(1)
-	
-def login():
-	global nextstep
-	os.system("clear")
-	ansUserName = input("Username > ")
-	ansPassWord = input("Password > ")
-	salt = db[ansUserName]["salt"]
-	newAns = f"{ansPassWord}{salt}"
-	newAns = hash(newAns)
-	if newAns == db[ansUserName]["Password"]:
-		print("Login successful")
-		nextstep = True
-	else:
-		print("Login Error")
-	time.sleep(1)
+import datetime, os, time, random
 
 def addEntry():
   time.sleep(1)
@@ -39,7 +11,7 @@ def addEntry():
   db[timestamp] = entry
 
 def viewEntry():
-  keys = db.keys()
+  keys = db.prefix("2")
   for key in keys:
     time.sleep(1)
     os.system("clear")
@@ -49,31 +21,33 @@ def viewEntry():
     opt = input("Next or exit? > ")
     if(opt.lower()[0]=="e"):
       break
-	
-while True:
-	os.system("clear")
-	print("Login System")
-	step = int(input("1.Add User, 2.Login > "))
-	if step == 1:
-		add()
-	elif step == 2:
-		login()
-		if nextstep:
-			break
-	else:
-		print("Please try again.")
 
-print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
-time.sleep(1)
-nextstep = False
 
+
+keys = db.keys()
+if len(keys)<1:
+  print("First Run > Create account")
+  username = input("Username > ")
+  password = input("Password > ")
+  salt = random.randint(0,9999999)
+  newPassword = hash(f"{password}{salt}")
+  db[username] = {"password": newPassword, "salt": salt}
+else:
+  print("Log in")
+  username = input("Username > ")
+  password = input("Password > ")
+  if username not in keys:
+    print("Username or password incorrect")
+    exit()
+  salt = db[username]["salt"]
+  newPassword = hash(f"{password}{salt}")
+  if db[username]["password"]!=newPassword:
+    print("Username or password incorrect")
+    exit()
 while True:
   os.system("clear")
-  menu = input("1: Add\n2: View\n 3:Log out\n>")
+  menu = input("1: Add\n2: View\n> ")
   if menu == "1":
     addEntry()
-  elif menu == "2":
-    viewEntry()
   else:
-    print("Log out")
-    break
+    viewEntry()
