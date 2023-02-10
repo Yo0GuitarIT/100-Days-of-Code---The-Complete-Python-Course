@@ -1,40 +1,5 @@
-import random, os, time, datetime
 from replit import db
-
-nextstep = False
-
-def add():
-	os.system("clear")
-	userName = input("Username > ")
-	passWord = input("Password > ")
-	salt = random.randint(1000,9999)
-	newPassWord = f"{passWord}{salt}"
-	newPassWord = hash(newPassWord)
-	db[userName] = {"Password": newPassWord,"salt":salt}
-	print("It's be signed up")
-	time.sleep(1)
-	
-def login():
-	global nextstep
-	os.system("clear")
-	ansUserName = input("Username > ")
-	ansPassWord = input("Password > ")
-	keys = db.keys()
-	for key in keys:
-		if key == ansUserName:
-			salt = db[ansUserName]["salt"]
-			ansPassWord = f"{ansPassWord}{salt}"
-			ansPassWord = hash(ansPassWord)
-			if ansPassWord == db[key]["Password"]:
-				print("Login Successful")
-				nextstep = True
-				time.sleep(1)
-			else:
-				print("Password is error.")
-				time.sleep(1)
-		else:
-			print("Username could not be found.")
-			time.sleep(1)
+import datetime, os, time, random
 
 def addEntry():
   time.sleep(1)
@@ -57,20 +22,28 @@ def viewEntry():
     if(opt.lower()[0]=="e"):
       break
 
-while True:
-	os.system("clear")
-	print("Login System")
-	step = int(input("1.Add User, 2.Login > "))
-	if step == 1:
-		add()
-	elif step == 2:
-		login()
-		if nextstep:
-			exit()
-	else:
-		print("Please try again.")
 
-print("~~~~~~~~~~~Login~~~~~~~~~~~~~~~")
+
+keys = db.keys()
+if len(keys)<1:
+  print("First Run > Create account")
+  username = input("Username > ")
+  password = input("Password > ")
+  salt = random.randint(0,9999999)
+  newPassword = hash(f"{password}{salt}")
+  db[username] = {"password": newPassword, "salt": salt}
+else:
+  print("Log in")
+  username = input("Username > ")
+  password = input("Password > ")
+  if username not in keys:
+    print("Username or password incorrect")
+    exit()
+  salt = db[username]["salt"]
+  newPassword = hash(f"{password}{salt}")
+  if db[username]["password"]!=newPassword:
+    print("Username or password incorrect")
+    exit()
 while True:
   os.system("clear")
   menu = input("1: Add\n2: View\n> ")
