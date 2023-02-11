@@ -1,0 +1,26 @@
+html, body {
+  height: 100%;
+  width: 100%;
+	background-color: #151e38;
+}
+
+h1,h2,p{
+  font-family: monospace;
+  color: #ffffff; 
+}
+
+p,img{
+	text-align: center;
+	font-family: fantasy;
+	background-color: #444444;
+	padding: 20px
+}
+
+img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width:70%;
+}
+
+
